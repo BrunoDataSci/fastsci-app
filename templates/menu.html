@@ -1,0 +1,41 @@
+<!-- menu.html -->
+<style>
+    ul.menu {
+        list-style-type: none;
+        margin: 0;
+        padding: 0;
+        overflow: hidden;
+        background-color: #333; /* Background color for the menu */
+    }
+
+    ul.menu li {
+        float: left;
+    }
+
+    ul.menu li a {
+        display: block;
+        color: white;
+        text-align: center;
+        padding: 14px 16px;
+        text-decoration: none;
+    }
+
+    ul.menu li a:hover {
+        background-color: #555; /* Background color on hover */
+    }
+</style>
+
+<ul class="menu">
+    <li><a href="/candlestick">Chart</a></li>
+    <li><a href="/describe">Describe</a></li>
+    <li><a href="/drawdown">Drawdown</a></li>
+    <li><a href="/ddplot">Drawdown Chart</a></li>
+    <li><a href="/crossover">Crossover</a></li>
+    <li><a href="/momentum">Momentum</a></li>
+    <li><a href="/meanreversion">Mean Reversion</a></li>
+    <li><a href="/trend">Trend</a></li>
+    <li><a href="/classification">Classification</a></li>
+    <li><a href="/lstm">LSTM</a></li>
+</ul>
+
+{% block content %}{% endblock %}
