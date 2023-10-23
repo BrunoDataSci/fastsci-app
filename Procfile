@@ -1,2 +1,2 @@
-web: gunicorn fastsci-app:app
+web: gunicorn main:app
 
