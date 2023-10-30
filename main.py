@@ -9,12 +9,13 @@ data_downloaded = None  # Initialize the data_downloaded variable
 drawdown_data = None  # Initialize the drawdown_data variable
 image_base64 = None
 drawdown_desc = None
-
+symbol = None
 
 # Route for the main page (form input)
 @app.route('/', methods=['GET', 'POST'])
 def main_page():
     if request.method == 'POST':
+        global symbol
         symbol = request.form['symbol']
         start_date = request.form['start_date']
         end_date = request.form['end_date']
