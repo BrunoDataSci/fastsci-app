@@ -1,0 +1,29 @@
+{% extends "base.html" %}
+
+{% block title %}Downloaded Data{% endblock %}
+
+{% block content_title %}Downloaded Data{% endblock %}
+
+{% block content %}
+
+
+
+
+    {# Include the content from 'menu.html' in the first 'content' block #}
+    {% include "menu.html" %}
+    {# Your page-specific content goes here #}
+
+
+
+    {% if lstm is not defined or lstm.empty %}
+    <p></p>
+    {% else %}
+    <p></p>
+    <h2>LSTM</h2>
+    <img src="data:image/png;base64,{{lstm}}" alt="Crossover Plot">
+    <p></p>
+    {% endif %}
+
+
+
+{% endblock %}

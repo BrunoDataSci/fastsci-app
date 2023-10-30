@@ -1,0 +1,32 @@
+{% extends "base.html" %}
+
+{% block title %}Downloaded Data{% endblock %}
+
+{% block content_title %}Downloaded Data{% endblock %}
+
+{% block content %}
+
+
+
+
+    {# Include the content from 'menu.html' in the first 'content' block #}
+    {% include "menu.html" %}
+    {# Your page-specific content goes here #}
+
+
+
+
+
+{% if candlestick_json %}
+    <h2>Chart</h2>
+    <div id="candlestick-plot"></div>
+    <script>
+        var chartData = {{ candlestick_json|safe }};
+        Plotly.newPlot('candlestick-plot', chartData);
+    </script>
+{% endif %}
+
+
+
+
+{% endblock %}

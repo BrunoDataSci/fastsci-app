@@ -1,0 +1,33 @@
+{% extends "base.html" %}
+
+{% block title %}Downloaded Data{% endblock %}
+
+{% block content_title %}Downloaded Data{% endblock %}
+
+{% block content %}
+
+
+
+
+    {# Include the content from 'menu.html' in the first 'content' block #}
+    {% include "menu.html" %}
+    {# Your page-specific content goes here #}
+
+
+
+
+
+    <!-- Display drawdown plot -->
+    {% if image_base64 is not defined or image_base64.empty %}
+    <p></p>
+    {% else %}
+    <p></p>
+    <h2>Drawdown Plot</h2>
+    <img src="data:image/png;base64,{{ image_base64 }}" alt="Drawdown Plot">
+    {% endif %}
+
+
+
+
+{% endblock %}
+

@@ -1,0 +1,31 @@
+{% extends "base.html" %}
+
+{% block title %}Downloaded Data{% endblock %}
+
+{% block content_title %}Downloaded Data{% endblock %}
+
+{% block content %}
+
+
+
+
+    {# Include the content from 'menu.html' in the first 'content' block #}
+    {% include "menu.html" %}
+    {# Your page-specific content goes here #}
+
+
+
+    {% if drawdown_desc is not defined or drawdown_desc.empty %}
+    <p></p>
+    {% else %}
+    <p></p>
+    <h2>Drawdown Data</h2>
+    <div class="table-responsive">
+        {{ drawdown_desc.to_html(classes="table table-bordered table-striped", table_id="drawdown_desc-data")|safe }}
+    </div>
+    {% endif %}
+
+
+
+
+{% endblock %}

@@ -1,0 +1,31 @@
+{% extends "base.html" %}
+
+{% block title %}Downloaded Data{% endblock %}
+
+{% block content_title %}Downloaded Data{% endblock %}
+
+{% block content %}
+
+
+
+
+    {# Include the content from 'menu.html' in the first 'content' block #}
+    {% include "menu.html" %}
+    {# Your page-specific content goes here #}
+
+
+
+
+    {% if momentum is not defined or momentum.empty %}
+    <p></p>
+    {% else %}
+    <p></p>
+    <li><a href="/momentum">Try new period</a></li>
+    <p></p>
+    <h2>Momentum</h2>
+    <img src="data:image/png;base64,{{momentum}}" alt="Crossover Plot">
+    {% endif %}
+
+
+
+{% endblock %}

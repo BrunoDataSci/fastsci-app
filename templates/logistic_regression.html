@@ -1,0 +1,32 @@
+{% extends "base.html" %}
+
+{% block title %}Downloaded Data{% endblock %}
+
+{% block content_title %}Downloaded Data{% endblock %}
+
+{% block content %}
+
+
+
+
+    {# Include the content from 'menu.html' in the first 'content' block #}
+    {% include "menu.html" %}
+    {# Your page-specific content goes here #}
+
+
+
+
+
+    <!-- Display drawdown data -->
+    {% if df_classification is not defined or df_classification.empty %}
+    <p></p>
+    {% else %}
+    <p></p>
+    <h2>Classification </h2>
+    <h6>Model: Logistic Regression</h6>
+    <h6>Features: Close, Open, Volume </h6>
+    <h6>Target: Tomorrow's return (1: positive; 0: negative)</h6>
+    {{ df_classification.to_html(classes="table table-bordered table-striped", table_id="df_classification-data")|safe }}
+    {% endif %}
+
+{% endblock %}

@@ -1,0 +1,28 @@
+{% extends "base.html" %}
+
+{% block title %}Downloaded Data{% endblock %}
+
+{% block content_title %}Downloaded Data{% endblock %}
+
+{% block content %}
+
+
+
+
+    {# Include the content from 'menu.html' in the first 'content' block #}
+    {% include "menu.html" %}
+    {# Your page-specific content goes here #}
+
+
+
+
+    <!-- Display downloaded data -->
+    {% if data_downloaded is defined and not data_downloaded.empty %}
+    <p></p>
+    <h2>DataFrame</h2>
+    <div class="table-responsive">
+        {{ data_downloaded.to_html(classes="table table-bordered table-striped", table_id="downloaded-data")|safe }}
+    </div>
+    {% endif %}
+
+{% endblock %}

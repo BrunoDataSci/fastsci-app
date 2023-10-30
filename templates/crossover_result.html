@@ -1,0 +1,36 @@
+{% extends "base.html" %}
+
+{% block title %}Downloaded Data{% endblock %}
+
+{% block content_title %}Downloaded Data{% endblock %}
+
+{% block content %}
+
+
+
+
+    {# Include the content from 'menu.html' in the first 'content' block #}
+    {% include "menu.html" %}
+    {# Your page-specific content goes here #}
+
+
+
+
+
+
+
+    <!-- Display CROSSOVER plot -->
+    {% if plot_crossover is not defined or plot_crossover.empty %}
+    <p></p>
+    {% else %}
+    <p></p>
+    <li><a href="/crossover">Try new short and long period</a></li>
+    <p></p>
+    <h2>Crossover Plot</h2>
+    <img src="data:image/png;base64,{{plot_crossover}}" alt="Crossover Plot">
+    <p></p>
+    {% endif %}
+
+
+
+{% endblock %}

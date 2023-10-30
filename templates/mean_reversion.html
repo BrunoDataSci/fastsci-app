@@ -1,0 +1,29 @@
+{% extends "base.html" %}
+
+{% block title %}Downloaded Data{% endblock %}
+
+{% block content_title %}Downloaded Data{% endblock %}
+
+{% block content %}
+
+
+
+
+    {# Include the content from 'menu.html' in the first 'content' block #}
+    {% include "menu.html" %}
+    {# Your page-specific content goes here #}
+
+
+
+    {% if mean_reversion is not defined or mean_reversion.empty %}
+    <p></p>
+    {% else %}
+    <p></p>
+    <h2>Mean Reversion</h2>
+    <h6>Mean: 20</h6>
+    <h6>STD: 2</h6>
+    <img src="data:image/png;base64,{{mean_reversion}}" alt="Mean Reversion Plot">
+    {% endif %}
+
+
+{% endblock %}

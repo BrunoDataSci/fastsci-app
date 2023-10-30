@@ -56,35 +56,6 @@
     {# Your page-specific content goes here #}
 
 
-
-    {% if drawdown_desc is not defined or drawdown_desc.empty %}
-    <p></p>
-    {% else %}
-    <p></p>
-    <h2>Drawdown Data</h2>
-    <div class="table-responsive">
-        {{ drawdown_desc.to_html(classes="table table-bordered table-striped", table_id="drawdown_desc-data")|safe }}
-    </div>
-    {% endif %}
-
-
-
-
-
-
-
-    <!-- Display drawdown plot -->
-    {% if image_base64 is not defined or image_base64.empty %}
-    <p></p>
-    {% else %}
-    <p></p>
-    <h2>Drawdown Plot</h2>
-    <img src="data:image/png;base64,{{ image_base64 }}" alt="Drawdown Plot">
-    {% endif %}
-
-
-
-
     <!-- Display downloaded data -->
     {% if data_downloaded is defined and not data_downloaded.empty %}
     <p></p>
@@ -95,100 +66,6 @@
     {% endif %}
 
 
-
-    <!-- Display drawdown data -->
-    {% if describe is not defined or describe.empty %}
-    <p></p>
-    {% else %}
-    <p></p>
-    <h2>Drawdown Data</h2>
-    {{ describe.to_html(classes="table table-bordered table-striped", table_id="describe-data")|safe }}
-    {% endif %}
-
-
-
-
-{% if candlestick_json %}
-    <h2>Chart</h2>
-    <div id="candlestick-plot"></div>
-    <script>
-        var chartData = {{ candlestick_json|safe }};
-        Plotly.newPlot('candlestick-plot', chartData);
-    </script>
-{% endif %}
-
-
-
-    {% if lstm is not defined or lstm.empty %}
-    <p></p>
-    {% else %}
-    <p></p>
-    <h2>LSTM</h2>
-    <img src="data:image/png;base64,{{lstm}}" alt="Crossover Plot">
-    <p></p>
-    {% endif %}
-
-
-
-    <!-- Display CROSSOVER plot -->
-    {% if plot_crossover is not defined or plot_crossover.empty %}
-    <p></p>
-    {% else %}
-    <p></p>
-    <li><a href="/crossover">Try new short and long period</a></li>
-    <p></p>
-    <h2>Crossover Plot</h2>
-    <img src="data:image/png;base64,{{plot_crossover}}" alt="Crossover Plot">
-    <p></p>
-    {% endif %}
-
-
-
-    {% if momentum is not defined or momentum.empty %}
-    <p></p>
-    {% else %}
-    <p></p>
-    <li><a href="/momentum">Try new period</a></li>
-    <p></p>
-    <h2>Momentum</h2>
-    <img src="data:image/png;base64,{{momentum}}" alt="Crossover Plot">
-    {% endif %}
-
-
-
-    <!-- Display drawdown data -->
-    {% if df_classification is not defined or df_classification.empty %}
-    <p></p>
-    {% else %}
-    <p></p>
-    <h2>Classification </h2>
-    <h6>Model: Logistic Regression</h6>
-    <h6>Features: Close, Open, Volume </h6>
-    <h6>Target: Tomorrow's return (1: positive; 0: negative)</h6>
-    {{ df_classification.to_html(classes="table table-bordered table-striped", table_id="df_classification-data")|safe }}
-    {% endif %}
-
-
-    {% if mean_reversion is not defined or mean_reversion.empty %}
-    <p></p>
-    {% else %}
-    <p></p>
-    <h2>Mean Reversion</h2>
-    <h6>Mean: 20</h6>
-    <h6>STD: 2</h6>
-    <img src="data:image/png;base64,{{mean_reversion}}" alt="Mean Reversion Plot">
-    {% endif %}
-
-
-    {% if trend is not defined or trend.empty %}
-    <p></p>
-    {% else %}
-    <p></p>
-    <h2>Trend</h2>
-    <h6>Short window: 10</h6>
-    <h6>Long window: 50</h6>
-    <img src="data:image/png;base64,{{trend}}" alt="Breakout Plot">
-    {% endif %}
 
 {% endblock %}
 
