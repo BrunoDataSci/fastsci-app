@@ -36,7 +36,7 @@ def main_page():
 def calculate_describe():
     if data_downloaded is not None:
         describe = func.data_describe(data_downloaded)
-    return render_template('index.html', describe=describe)
+    return render_template('data_downloaded.html', describe=describe)
 
 
 
@@ -47,7 +47,7 @@ def drawdown():
     global drawdown_desc
     if data_downloaded is not None:
         drawdown_desc = func.drawdown(data_downloaded)
-        return render_template('index.html',  drawdown_desc=drawdown_desc)
+        return render_template('drawdown_desc.html',  drawdown_desc=drawdown_desc)
     else:
         return "Drawdown data is not available."
 
@@ -59,7 +59,7 @@ def drawdown():
 def drawdown_plot():
     if data_downloaded is not None:
         image_base64 = func.drawdown_plot(data_downloaded)
-        return render_template('index.html', image_base64=image_base64)
+        return render_template('drawdown_plot.html', image_base64=image_base64)
     else:
         return "Drawdown data is not available. Please calculate drawdown first."
 
@@ -69,7 +69,7 @@ def drawdown_plot():
 def candlestick():
     if data_downloaded is not None:
         candlestick_json, candlestick_table = func.candlestick_chart(data_downloaded)
-        return render_template('index.html', candlestick_json=candlestick_json, candlestick_table=candlestick_table)
+        return render_template('candlestick_plot.html', candlestick_json=candlestick_json, candlestick_table=candlestick_table)
     else:
         return "No plot."
 
@@ -79,7 +79,7 @@ def candlestick():
 def lstm():
     if data_downloaded is not None:
         lstm = func.lstm(data_downloaded)
-        return render_template('index.html', lstm=lstm)
+        return render_template('lstm.html', lstm=lstm)
     else:
         return "No plot."
 
@@ -92,7 +92,7 @@ def crossover():
     elif request.method == 'POST':
         if data_downloaded is not None:
             plot_crossover = func.crossover(data_downloaded)
-            return render_template('index.html', plot_crossover=plot_crossover)
+            return render_template('crossover_result.html', plot_crossover=plot_crossover)
         else:
             return "Crossover data is not available. Please calculate crossover first."
 
@@ -104,7 +104,7 @@ def momentum():
     elif request.method == 'POST':
         if data_downloaded is not None:
             momentum = func.momentum(data_downloaded)
-            return render_template('index.html', momentum=momentum)
+            return render_template('momentum_result.html', momentum=momentum)
         else:
             return "Momentum data is not available. Please calculate Momentum first."
 
@@ -113,7 +113,7 @@ def momentum():
 def classification():
     if data_downloaded is not None:
         df_classification = func.classification(data_downloaded)
-        return render_template('index.html', df_classification=df_classification)
+        return render_template('logistic_regression.html', df_classification=df_classification)
     else:
         return "No sign."
 
@@ -123,7 +123,7 @@ def classification():
 def mean_reversion():
     if data_downloaded is not None:
         mean_reversion = func.mean_reversion(data_downloaded)
-        return render_template('index.html', mean_reversion=mean_reversion)
+        return render_template('mean_reversion.html', mean_reversion=mean_reversion)
     else:
         return "Mean Reversion data is not available. Please calculate mean reversion first."
 
@@ -132,7 +132,7 @@ def mean_reversion():
 def trend():
     if data_downloaded is not None:
         trend = func.trend(data_downloaded)
-        return render_template('index.html', trend=trend)
+        return render_template('trend.html', trend=trend)
     else:
         return "trend data is not available. Please calculate trend first."
 
