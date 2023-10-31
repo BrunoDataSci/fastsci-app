@@ -13,7 +13,20 @@ image_base64 = None
 drawdown_desc = None
 symbol = None
 
-# Route for the main page (form input)
+
+def store_data_in_session(df):
+    serialized_df = df.to_json()
+    session['data_downloaded'] = serialized_df
+
+# Function to retrieve data from the session and convert it back to a DataFrame
+def retrieve_data_from_session():
+    serialized_df = session.get('data_downloaded')
+    if serialized_df:
+        df = pd.read_json(serialized_df)
+        return df
+    else:
+        return None
+
 @app.route('/', methods=['GET', 'POST'])
 def main_page():
     if request.method == 'POST':
@@ -23,16 +36,19 @@ def main_page():
 
         # Download data and store it in the session
         data_downloaded = func.download_data(symbol, start_date, end_date)
-        session['data_downloaded'] = data_downloaded
 
-        # Check if data_downloaded is available and not None
         if data_downloaded is not None and not data_downloaded.empty:
+            store_data_in_session(data_downloaded)  # Store in session
             return render_template('index.html', data_downloaded=data_downloaded)
         else:
-            # Handle the case where data_downloaded is not available
             return render_template('index.html', error_message="Data not available.")
 
-    return render_template('index.html')
+    # Retrieve data from session if it exists
+    data_downloaded = retrieve_data_from_session()
+    if data_downloaded is not None:
+        return render_template('index.html', data_downloaded=data_downloaded)
+    else:
+        return render_template('index.html')
 
 
 

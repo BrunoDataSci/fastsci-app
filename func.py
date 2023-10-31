@@ -23,8 +23,6 @@ def download_data(symbol, start_date, end_date):
   start_date = datetime.strptime(start_date, '%Y-%m-%d')
   end_date = datetime.strptime(end_date, '%Y-%m-%d')
   data_downloaded = yf.download(symbol, start=start_date, end=end_date)
-  data_downloaded = data_downloaded.to_dict(orient='records')
-  data_downloaded = json.dumps(data_downloaded)
   return data_downloaded
 
 
