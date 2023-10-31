@@ -4,6 +4,8 @@ import yfinance as yf
 import pandas as pd
 
 app = Flask(__name__)
+app.secret_key = '123456'  # Set a secret key for the session
+
 
 data_downloaded = None  # Initialize the data_downloaded variable
 drawdown_data = None  # Initialize the drawdown_data variable
