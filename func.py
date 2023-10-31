@@ -13,7 +13,7 @@ from sklearn.preprocessing import MinMaxScaler
 from tensorflow.keras.models import Sequential
 from tensorflow.keras.layers import LSTM, Dense, Dropout
 from flask import Flask, render_template, request
-
+import json
 from sklearn.model_selection import train_test_split
 from sklearn.linear_model import LogisticRegression
 from sklearn.metrics import accuracy_score
@@ -23,6 +23,8 @@ def download_data(symbol, start_date, end_date):
   start_date = datetime.strptime(start_date, '%Y-%m-%d')
   end_date = datetime.strptime(end_date, '%Y-%m-%d')
   data_downloaded = yf.download(symbol, start=start_date, end=end_date)
+  data_downloaded = data_downloaded.to_dict(orient='records')
+  data_downloaded = json.dumps(data_downloaded)
   return data_downloaded
 
 
