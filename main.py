@@ -37,10 +37,8 @@ def main_page():
     return render_template('index.html')
 
 
-
-# Route to calculate drawdown
 @app.route('/describe', methods=['GET', 'POST'])
-def calculate_describe():
+def describe():
     global symbol
     global start_date
     global end_date
