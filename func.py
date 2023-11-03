@@ -26,7 +26,7 @@ def download_data(symbol, start_date, end_date):
   return data_downloaded
 
 
-def data_describe(symbol, start_date, end_date):
+def describe(symbol, start_date, end_date):
     start_date = datetime.strptime(start_date, '%Y-%m-%d')
     end_date = datetime.strptime(end_date, '%Y-%m-%d')
     data_downloaded = yf.download(symbol, start=start_date, end=end_date)
