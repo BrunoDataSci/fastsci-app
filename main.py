@@ -41,9 +41,15 @@ def main_page():
 # Route to calculate drawdown
 @app.route('/describe', methods=['GET', 'POST'])
 def calculate_describe():
+    global symbol
+    global start_date
+    global end_date
     if symbol is not None:
-        describe = func.data_describe(symbol, start_date, end_date)
-    return render_template('index.html', describe=describe)
+        describe = func.describe(symbol, start_date, end_date)
+        return render_template('index.html', describe=describe)
+    else:
+        return render_template('index.html', error_message="Data not available")
+
 
 
 
