@@ -25,12 +25,9 @@ def main_page():
         start_date = request.form['start_date']
         end_date = request.form['end_date']
 
-        # Download data and store it in the global variable
-
         data_downloaded = func.download_data(symbol, start_date, end_date)
 
-        # Check if data_downloaded is available and not None
-    if symbol is not None:
+    if data_downloaded is not None:
         return render_template('index.html', data_downloaded=data_downloaded)
     else:
         # Handle the case where data_downloaded is not available
