@@ -56,12 +56,6 @@ def drawdown_plot(symbol, start_date, end_date):
     dd = drawdown_p.reset_index()
     time_axis = dd['Date']
     plt.figure(figsize=(10, 5))
-    plt.plot(time_axis, df, label="Investment Value",  linestyle='-')
-    plt.xlabel("Time")
-    plt.ylabel("Value")
-    plt.title("Investment Value Over Time")
-    plt.grid()
-    plt.figure(figsize=(10, 5))
     plt.plot(time_axis, drawdown_p, label="Drawdown", color='red',linestyle='-')
     plt.xlabel("Time")
     plt.ylabel("Drawdown")
@@ -73,6 +67,8 @@ def drawdown_plot(symbol, start_date, end_date):
     buffer.seek(0)
     drawdown_plot = base64.b64encode(buffer.read()).decode("utf-8")
     return drawdown_plot
+
+
 
 
 def candlestick_chart(symbol, start_date, end_date):
