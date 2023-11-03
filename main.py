@@ -27,11 +27,11 @@ def main_page():
 
         data_downloaded = func.download_data(symbol, start_date, end_date)
 
-    if data_downloaded is not None:
-        return render_template('index.html', data_downloaded=data_downloaded)
-    else:
-        # Handle the case where data_downloaded is not available
-        return render_template('index.html')
+        if data_downloaded is not None:
+            return render_template('index.html', data_downloaded=data_downloaded)
+        else:
+            # Handle the case where data_downloaded is not available
+            return render_template('index.html')
 
 
 # Route to calculate drawdown
