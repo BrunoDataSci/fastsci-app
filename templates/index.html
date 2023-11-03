@@ -60,7 +60,7 @@
     {% if data_downloaded is defined and not data_downloaded.empty %}
     <p></p>
     <h2>DataFrame</h2>
-    <h2>{{symbol}}</h2>
+    <h2>{{ symbol|safe }}</h2>
     <div class="table-responsive">
         {{ data_downloaded.to_html(classes="table table-bordered table-striped", table_id="downloaded-data")|safe }}
     </div>

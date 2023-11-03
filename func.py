@@ -41,9 +41,9 @@ def drawdown(symbol, start_date, end_date):
     data_downloaded = yf.download(symbol, start=start_date, end=end_date)
     df=data_downloaded[['Adj Close']]
     cummax = np.maximum.accumulate(df)
-    drawdown_data = (df - cummax) / cummax
-    drawdown_desc = drawdown_data.describe()
-    return drawdown_desc
+    drawdown = (df - cummax) / cummax
+    drawdown = drawdown_data.describe()
+    return drawdown
 
 
 def drawdown_plot(symbol, start_date, end_date):

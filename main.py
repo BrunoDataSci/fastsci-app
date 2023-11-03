@@ -5,9 +5,8 @@ import pandas as pd
 
 app = Flask(__name__)
 
-drawdown_data = None  # Initialize the drawdown_data variable
+drawdown = None  # Initialize the drawdown_data variable
 image_base64 = None
-drawdown_desc = None
 symbol = None
 start_date = None
 end_date = None
@@ -53,11 +52,13 @@ def describe():
 # Route to calculate drawdown
 @app.route('/drawdown', methods=['GET', 'POST'])
 def drawdown():
-    global drawdown_data
-    global drawdown_desc
+    global symbol
+    global start_date
+    global end_date
+    global drawdown
     if symbol is not None:
-        drawdown_desc = func.drawdown(symbol, start_date, end_date)
-        return render_template('index.html',  drawdown_desc=drawdown_desc)
+        drawdown = func.drawdown(symbol, start_date, end_date)
+        return render_template('drawdown_data.html',  drawdown=drawdown)
     else:
         return "Drawdown data is not available."
 
