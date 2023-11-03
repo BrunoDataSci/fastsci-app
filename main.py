@@ -17,14 +17,16 @@ end_date = None
 @app.route('/', methods=['GET', 'POST'])
 def main_page():
     if request.method == 'POST':
+        global symbol
+        global start_date
+        global end_date
+
         symbol = request.form['symbol']
         start_date = request.form['start_date']
         end_date = request.form['end_date']
 
         # Download data and store it in the global variable
-        global symbol
-        global start_date
-        global end_date
+
         data_downloaded = func.download_data(symbol, start_date, end_date)
 
         # Check if data_downloaded is available and not None
