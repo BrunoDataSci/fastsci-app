@@ -30,7 +30,7 @@ def main_page():
         data_downloaded = func.download_data(symbol, start_date, end_date)
 
         # Check if data_downloaded is available and not None
-    if symbol is not None and not symbol.empty:
+    if symbol is not None:
         return render_template('index.html', data_downloaded=data_downloaded)
     else:
         # Handle the case where data_downloaded is not available
