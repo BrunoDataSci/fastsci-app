@@ -26,49 +26,61 @@ def download_data(symbol, start_date, end_date):
   return data_downloaded
 
 
-def data_describe(database):
-    db = database[['Open','High','Low','Close','Adj Close','Volume']]
+def data_describe(symbol, start_date, end_date):
+    start_date = datetime.strptime(start_date, '%Y-%m-%d')
+    end_date = datetime.strptime(end_date, '%Y-%m-%d')
+    data_downloaded = yf.download(symbol, start=start_date, end=end_date)
+    db = data_downloaded[['Open','High','Low','Close','Adj Close','Volume']]
     describe = db.describe()
     return describe
 
 
-def drawdown(database):
-    df=database[['Adj Close']]
+def drawdown(symbol, start_date, end_date):
+    start_date = datetime.strptime(start_date, '%Y-%m-%d')
+    end_date = datetime.strptime(end_date, '%Y-%m-%d')
+    data_downloaded = yf.download(symbol, start=start_date, end=end_date)
+    df=data_downloaded[['Adj Close']]
     cummax = np.maximum.accumulate(df)
     drawdown_data = (df - cummax) / cummax
     drawdown_desc = drawdown_data.describe()
     return drawdown_desc
 
 
-def drawdown_plot(database):
-  df=database[['Adj Close']]
-  cummax = np.maximum.accumulate(df)
-  drawdown = (df - cummax) / cummax
-  dd = drawdown.reset_index()
-  time_axis = dd['Date']
-  plt.figure(figsize=(10, 5))
-  plt.plot(time_axis, df, label="Investment Value",  linestyle='-')
-  plt.xlabel("Time")
-  plt.ylabel("Value")
-  plt.title("Investment Value Over Time")
-  plt.grid()
-  plt.figure(figsize=(10, 5))
-  plt.plot(time_axis, drawdown, label="Drawdown", color='red',linestyle='-')
-  plt.xlabel("Time")
-  plt.ylabel("Drawdown")
-  plt.title("Drawdown Over Time")
-  plt.grid()
-  plt.legend()
-  buffer = io.BytesIO()
-  plt.savefig(buffer, format="png")
-  buffer.seek(0)
-  image_base64 = base64.b64encode(buffer.read()).decode("utf-8")
-  return image_base64
+def drawdown_plot(symbol, start_date, end_date):
+    start_date = datetime.strptime(start_date, '%Y-%m-%d')
+    end_date = datetime.strptime(end_date, '%Y-%m-%d')
+    data_downloaded = yf.download(symbol, start=start_date, end=end_date)
+    df=data_downloaded[['Adj Close']]
+    cummax = np.maximum.accumulate(df)
+    drawdown = (df - cummax) / cummax
+    dd = drawdown.reset_index()
+    time_axis = dd['Date']
+    plt.figure(figsize=(10, 5))
+    plt.plot(time_axis, df, label="Investment Value",  linestyle='-')
+    plt.xlabel("Time")
+    plt.ylabel("Value")
+    plt.title("Investment Value Over Time")
+    plt.grid()
+    plt.figure(figsize=(10, 5))
+    plt.plot(time_axis, drawdown, label="Drawdown", color='red',linestyle='-')
+    plt.xlabel("Time")
+    plt.ylabel("Drawdown")
+    plt.title("Drawdown Over Time")
+    plt.grid()
+    plt.legend()
+    buffer = io.BytesIO()
+    plt.savefig(buffer, format="png")
+    buffer.seek(0)
+    image_base64 = base64.b64encode(buffer.read()).decode("utf-8")
+    return image_base64
 
 
-def candlestick_chart(database):
+def candlestick_chart(symbol, start_date, end_date):
+    start_date = datetime.strptime(start_date, '%Y-%m-%d')
+    end_date = datetime.strptime(end_date, '%Y-%m-%d')
+    data_downloaded = yf.download(symbol, start=start_date, end=end_date)
     # Create a candlestick chart using Plotly
-    df = database.reset_index()
+    df = data_downloaded.reset_index()
     fig = go.Figure(data=[go.Candlestick(x=df['Date'],
                                         open=df['Open'],
                                         high=df['High'],
@@ -86,8 +98,11 @@ def candlestick_chart(database):
     return candlestick_json, candlestick_table
 
 
-def lstm(database):
-    data = database
+def lstm(symbol, start_date, end_date):
+    start_date = datetime.strptime(start_date, '%Y-%m-%d')
+    end_date = datetime.strptime(end_date, '%Y-%m-%d')
+    data_downloaded = yf.download(symbol, start=start_date, end=end_date)
+    data = data_downloaded
     data = data[["Close"]]
 
     scaler = MinMaxScaler()
@@ -175,10 +190,13 @@ def lstm(database):
 
 
 
-def crossover(database):
+def crossover(symbol, start_date, end_date):
+    start_date = datetime.strptime(start_date, '%Y-%m-%d')
+    end_date = datetime.strptime(end_date, '%Y-%m-%d')
+    data_downloaded = yf.download(symbol, start=start_date, end=end_date)
     short_period = int(request.form['short_period'])
     long_period = int(request.form['long_period'])
-    data = database
+    data = data_downloaded
     data['EMA_short'] = data['Close'].ewm(span=short_period, adjust=False).mean()
     data['EMA_long'] = data['Close'].ewm(span=long_period, adjust=False).mean()
     data['Signal'] = 0
@@ -200,7 +218,10 @@ def crossover(database):
     return plot_crossover
 
 
-def momentum(data):
+def momentum(symbol, start_date, end_date):
+    start_date = datetime.strptime(start_date, '%Y-%m-%d')
+    end_date = datetime.strptime(end_date, '%Y-%m-%d')
+    data = yf.download(symbol, start=start_date, end=end_date)
     lookback_period = int(request.form['lookback_period'])
     if 'Close' not in data.columns:
         raise ValueError("The 'Close' column is required in the input DataFrame.")
@@ -227,7 +248,10 @@ def momentum(data):
     return momentum
 
 
-def classification(data):
+def classification(symbol, start_date, end_date):
+    start_date = datetime.strptime(start_date, '%Y-%m-%d')
+    end_date = datetime.strptime(end_date, '%Y-%m-%d')
+    data = yf.download(symbol, start=start_date, end=end_date)
     data['Pct'] = data['Close'].pct_change()
     data['Pct_Sign'] = np.where(data['Pct'] > 0, 1, 0)
 
@@ -269,7 +293,10 @@ def classification(data):
 
 
 
-def mean_reversion(data, lookback_period=20, z_score_threshold=2):
+def mean_reversion(symbol, start_date, end_date, lookback_period=20, z_score_threshold=2):
+    start_date = datetime.strptime(start_date, '%Y-%m-%d')
+    end_date = datetime.strptime(end_date, '%Y-%m-%d')
+    data = yf.download(symbol, start=start_date, end=end_date)
     data['RollingMean'] = data['Close'].rolling(window=lookback_period).mean()
     data['RollingStd'] = data['Close'].rolling(window=lookback_period).std()
 
@@ -298,7 +325,10 @@ def mean_reversion(data, lookback_period=20, z_score_threshold=2):
     return plot_reversion
 
 
-def trend(data, short_window = 10, long_window = 50):
+def trend(symbol, start_date, end_date, short_window = 10, long_window = 50):
+    start_date = datetime.strptime(start_date, '%Y-%m-%d')
+    end_date = datetime.strptime(end_date, '%Y-%m-%d')
+    data = yf.download(symbol, start=start_date, end=end_date)
     data['Short_MA'] = data['Close'].rolling(window=short_window).mean()
     data['Long_MA'] = data['Close'].rolling(window=long_window).mean()
 
