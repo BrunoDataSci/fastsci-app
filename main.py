@@ -70,6 +70,9 @@ def drawdown():
 # Route to display the drawdown plot
 @app.route('/drawdown_plot', methods=['GET', 'POST'])
 def drawdown_plot():
+    global symbol
+    global start_date
+    global end_date
     if symbol is not None:
         drawdown_plot = func.drawdown_plot(symbol, start_date, end_date)
         return render_template('drawdown_plot.html', drawdown_plot=drawdown_plot)
@@ -80,9 +83,12 @@ def drawdown_plot():
 
 @app.route('/candlestick', methods=['GET', 'POST'])
 def candlestick():
+    global symbol
+    global start_date
+    global end_date
     if symbol is not None:
         candlestick_json, candlestick_table = func.candlestick_chart(symbol, start_date, end_date)
-        return render_template('index.html', candlestick_json=candlestick_json, candlestick_table=candlestick_table)
+        return render_template('candlestick_plot.html', candlestick_json=candlestick_json, candlestick_table=candlestick_table)
     else:
         return "No plot."
 
