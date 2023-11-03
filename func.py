@@ -42,7 +42,7 @@ def drawdown(symbol, start_date, end_date):
     df=data_downloaded[['Adj Close']]
     cummax = np.maximum.accumulate(df)
     drawdown = (df - cummax) / cummax
-    drawdown = drawdown_data.describe()
+    drawdown = drawdown.describe()
     return drawdown
 
 
@@ -71,8 +71,8 @@ def drawdown_plot(symbol, start_date, end_date):
     buffer = io.BytesIO()
     plt.savefig(buffer, format="png")
     buffer.seek(0)
-    image_base64 = base64.b64encode(buffer.read()).decode("utf-8")
-    return image_base64
+    drawdown_plot = base64.b64encode(buffer.read()).decode("utf-8")
+    return drawdown_plot
 
 
 def candlestick_chart(symbol, start_date, end_date):

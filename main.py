@@ -66,11 +66,11 @@ def drawdown():
 
 
 # Route to display the drawdown plot
-@app.route('/ddplot', methods=['GET', 'POST'])
+@app.route('/drawdown_plot', methods=['GET', 'POST'])
 def drawdown_plot():
     if symbol is not None:
-        image_base64 = func.drawdown_plot(symbol, start_date, end_date)
-        return render_template('index.html', image_base64=image_base64)
+        drawdown_plot = func.drawdown_plot(symbol, start_date, end_date)
+        return render_template('drawdown_plot.html', drawdown_plot=drawdown_plot)
     else:
         return "Drawdown data is not available. Please calculate drawdown first."
 
