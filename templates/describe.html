@@ -19,6 +19,7 @@
     {% else %}
     <p></p>
     <h2>Describe</h2>
+    {{symbol}}
     {{ describe.to_html(classes="table table-bordered table-striped", table_id="describe-data")|safe }}
     {% endif %}
 
