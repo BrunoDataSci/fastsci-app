@@ -33,6 +33,10 @@ def main_page():
             # Handle the case where data_downloaded is not available
             return render_template('index.html')
 
+    # For GET requests, when the form is not submitted
+    return render_template('index.html')
+
+
 
 # Route to calculate drawdown
 @app.route('/describe', methods=['GET', 'POST'])
