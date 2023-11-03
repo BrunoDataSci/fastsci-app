@@ -52,8 +52,8 @@ def drawdown_plot(symbol, start_date, end_date):
     data_downloaded = yf.download(symbol, start=start_date, end=end_date)
     df=data_downloaded[['Adj Close']]
     cummax = np.maximum.accumulate(df)
-    drawdown = (df - cummax) / cummax
-    dd = drawdown.reset_index()
+    drawdown_p = (df - cummax) / cummax
+    dd = drawdown_p.reset_index()
     time_axis = dd['Date']
     plt.figure(figsize=(10, 5))
     plt.plot(time_axis, df, label="Investment Value",  linestyle='-')
@@ -62,7 +62,7 @@ def drawdown_plot(symbol, start_date, end_date):
     plt.title("Investment Value Over Time")
     plt.grid()
     plt.figure(figsize=(10, 5))
-    plt.plot(time_axis, drawdown, label="Drawdown", color='red',linestyle='-')
+    plt.plot(time_axis, drawdown_p, label="Drawdown", color='red',linestyle='-')
     plt.xlabel("Time")
     plt.ylabel("Drawdown")
     plt.title("Drawdown Over Time")
