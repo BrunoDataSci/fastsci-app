@@ -10,7 +10,7 @@ image_base64 = None
 symbol = None
 start_date = None
 end_date = None
-
+downloaded = {}
 
 # Route for the main page (form input)
 @app.route('/', methods=['GET', 'POST'])
@@ -19,12 +19,14 @@ def main_page():
         global symbol
         global start_date
         global end_date
+        global downloaded
 
         symbol = request.form['symbol']
         start_date = request.form['start_date']
         end_date = request.form['end_date']
 
         data_downloaded = func.download_data(symbol, start_date, end_date)
+        downloaded[symbol] = data_downloaded
 
         if data_downloaded is not None:
             return render_template('index.html', data_downloaded=data_downloaded)
