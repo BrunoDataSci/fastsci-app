@@ -45,8 +45,8 @@ def calculate_describe():
     global start_date
     global end_date
     if symbol is not None:
-        describe = func.describe(symbol, start_date, end_date)
-        return render_template('index.html', describe=describe)
+        data_describe = func.data_describe(symbol, start_date, end_date)
+        return render_template('index.html', data_describe=data_describe)
     else:
         return render_template('index.html', error_message="Data not available")
 
