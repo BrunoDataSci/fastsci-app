@@ -19,7 +19,7 @@ def main_page():
         global symbol
         global start_date
         global end_date
-        global downloaded
+        global downloaded_dict
 
         drawdown = None
         image_base64 = None
