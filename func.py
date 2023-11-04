@@ -210,8 +210,8 @@ def crossover(symbol, start_date, end_date):
     plt.savefig(buffer, format="png")
     plt.close()
     buffer.seek(0)
-    plot_crossover = base64.b64encode(buffer.read()).decode("utf-8")
-    return plot_crossover
+    crossover = base64.b64encode(buffer.read()).decode("utf-8")
+    return crossover
 
 
 def momentum(symbol, start_date, end_date):

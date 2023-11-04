@@ -108,24 +108,30 @@ def lstm():
 # Route to display the drawdown plot
 @app.route('/crossover', methods=['GET', 'POST'])
 def crossover():
+    global symbol
+    global start_date
+    global end_date
     if request.method == 'GET':
         return render_template('crossover.html')
     elif request.method == 'POST':
         if symbol is not None:
-            plot_crossover = func.crossover(symbol, start_date, end_date)
-            return render_template('index.html', plot_crossover=plot_crossover)
+            crossover = func.crossover(symbol, start_date, end_date)
+            return render_template('crossover_result.html', crossover=crossover)
         else:
             return "Crossover data is not available. Please calculate crossover first."
 
 
 @app.route('/momentum', methods=['GET', 'POST'])
 def momentum():
+    global symbol
+    global start_date
+    global end_date
     if request.method == 'GET':
         return render_template('momentum.html')
     elif request.method == 'POST':
         if symbol is not None:
             momentum = func.momentum(symbol, start_date, end_date)
-            return render_template('index.html', momentum=momentum)
+            return render_template('momentum_result.html', momentum=momentum)
         else:
             return "Momentum data is not available. Please calculate Momentum first."
 
