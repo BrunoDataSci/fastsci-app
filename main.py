@@ -21,6 +21,14 @@ def main_page():
         global end_date
         global downloaded
 
+        drawdown = None
+        image_base64 = None
+        symbol = None
+        start_date = None
+        end_date = None
+        downloaded_dict = {}
+
+
         symbol = request.form['symbol']
         start_date = request.form['start_date']
         end_date = request.form['end_date']
