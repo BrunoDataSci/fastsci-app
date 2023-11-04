@@ -95,9 +95,12 @@ def candlestick():
 
 @app.route('/lstm', methods=['GET', 'POST'])
 def lstm():
+    global symbol
+    global start_date
+    global end_date
     if symbol is not None:
         lstm = func.lstm(symbol, start_date, end_date)
-        return render_template('index.html', lstm=lstm)
+        return render_template('lstm.html', lstm=lstm)
     else:
         return "No plot."
 
@@ -129,9 +132,12 @@ def momentum():
 
 @app.route('/classification', methods=['GET', 'POST'])
 def classification():
+    global symbol
+    global start_date
+    global end_date
     if symbol is not None:
-        df_classification = func.classification(symbol, start_date, end_date)
-        return render_template('index.html', df_classification=df_classification)
+        classification = func.classification(symbol, start_date, end_date)
+        return render_template('logistic_regression.html', classification=classification)
     else:
         return "No sign."
 

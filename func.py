@@ -283,9 +283,9 @@ def classification(symbol, start_date, end_date):
     else:
         tomorrow_is = 'Negative';
 
-    df_classification = pd.DataFrame({'Prediction for Tomorrow': [tomorrow_is], 'Accuracy': [accuracy]})
+    classification = pd.DataFrame({'Prediction for Tomorrow': [tomorrow_is], 'Accuracy': [accuracy]})
 
-    return df_classification
+    return classification
 
 
 

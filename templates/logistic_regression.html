@@ -18,7 +18,7 @@
 
 
     <!-- Display drawdown data -->
-    {% if df_classification is not defined or df_classification.empty %}
+    {% if classification is not defined or classification.empty %}
     <p></p>
     {% else %}
     <p></p>
@@ -26,7 +26,7 @@
     <h6>Model: Logistic Regression</h6>
     <h6>Features: Close, Open, Volume </h6>
     <h6>Target: Tomorrow's return (1: positive; 0: negative)</h6>
-    {{ df_classification.to_html(classes="table table-bordered table-striped", table_id="df_classification-data")|safe }}
+    {{ classification.to_html(classes="table table-bordered table-striped", table_id="df_classification-data")|safe }}
     {% endif %}
 
 {% endblock %}
