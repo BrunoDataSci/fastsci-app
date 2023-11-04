@@ -47,7 +47,7 @@ def describe():
         describe = func.describe(symbol, start_date, end_date)
         return render_template('describe.html', describe=describe)
     else:
-        return render_template('index.html', error_message="Data not available")
+        return "Describe data is not available."
 
 
 # Route to calculate drawdown
