@@ -33,10 +33,8 @@ def describe(symbol, start_date, end_date,downloaded_dict):
     return describe
 
 
-def drawdown(symbol, start_date, end_date):
-    start_date = datetime.strptime(start_date, '%Y-%m-%d')
-    end_date = datetime.strptime(end_date, '%Y-%m-%d')
-    data_downloaded = yf.download(symbol, start=start_date, end=end_date)
+def drawdown(symbol, start_date, end_date,downloaded_dict):
+    data_downloaded = pd.DataFrame(downloaded_dict[f'{symbol}'])
     df=data_downloaded[['Adj Close']]
     cummax = np.maximum.accumulate(df)
     drawdown = (df - cummax) / cummax
@@ -44,10 +42,8 @@ def drawdown(symbol, start_date, end_date):
     return drawdown
 
 
-def drawdown_plot(symbol, start_date, end_date):
-    start_date = datetime.strptime(start_date, '%Y-%m-%d')
-    end_date = datetime.strptime(end_date, '%Y-%m-%d')
-    data_downloaded = yf.download(symbol, start=start_date, end=end_date)
+def drawdown_plot(symbol, start_date, end_date,downloaded_dict):
+    data_downloaded = pd.DataFrame(downloaded_dict[f'{symbol}'])
     df=data_downloaded[['Adj Close']]
     cummax = np.maximum.accumulate(df)
     drawdown_p = (df - cummax) / cummax
@@ -69,10 +65,8 @@ def drawdown_plot(symbol, start_date, end_date):
 
 
 
-def candlestick_chart(symbol, start_date, end_date):
-    start_date = datetime.strptime(start_date, '%Y-%m-%d')
-    end_date = datetime.strptime(end_date, '%Y-%m-%d')
-    data_downloaded = yf.download(symbol, start=start_date, end=end_date)
+def candlestick_chart(symbol, start_date, end_date,downloaded_dict):
+    data_downloaded = pd.DataFrame(downloaded_dict[f'{symbol}'])
     # Create a candlestick chart using Plotly
     df = data_downloaded.reset_index()
     fig = go.Figure(data=[go.Candlestick(x=df['Date'],
@@ -92,10 +86,8 @@ def candlestick_chart(symbol, start_date, end_date):
     return candlestick_json, candlestick_table
 
 
-def lstm(symbol, start_date, end_date):
-    start_date = datetime.strptime(start_date, '%Y-%m-%d')
-    end_date = datetime.strptime(end_date, '%Y-%m-%d')
-    data_downloaded = yf.download(symbol, start=start_date, end=end_date)
+def lstm(symbol, start_date, end_date,downloaded_dict):
+    data_downloaded = pd.DataFrame(downloaded_dict[f'{symbol}'])
     data = data_downloaded
     data = data[["Close"]]
 
@@ -181,10 +173,8 @@ def lstm(symbol, start_date, end_date):
     return lstm
 
 
-def crossover(symbol, start_date, end_date):
-    start_date = datetime.strptime(start_date, '%Y-%m-%d')
-    end_date = datetime.strptime(end_date, '%Y-%m-%d')
-    data_downloaded = yf.download(symbol, start=start_date, end=end_date)
+def crossover(symbol, start_date, end_date,downloaded_dict):
+    data_downloaded = pd.DataFrame(downloaded_dict[f'{symbol}'])
     short_period = int(request.form['short_period'])
     long_period = int(request.form['long_period'])
     data = data_downloaded
@@ -209,10 +199,9 @@ def crossover(symbol, start_date, end_date):
     return crossover
 
 
-def momentum(symbol, start_date, end_date):
-    start_date = datetime.strptime(start_date, '%Y-%m-%d')
-    end_date = datetime.strptime(end_date, '%Y-%m-%d')
-    data = yf.download(symbol, start=start_date, end=end_date)
+def momentum(symbol, start_date, end_date,downloaded_dict):
+    data_downloaded = pd.DataFrame(downloaded_dict[f'{symbol}'])
+    data = data_downloaded
     lookback_period = int(request.form['lookback_period'])
     if 'Close' not in data.columns:
         raise ValueError("The 'Close' column is required in the input DataFrame.")
@@ -239,10 +228,9 @@ def momentum(symbol, start_date, end_date):
     return momentum
 
 
-def classification(symbol, start_date, end_date):
-    start_date = datetime.strptime(start_date, '%Y-%m-%d')
-    end_date = datetime.strptime(end_date, '%Y-%m-%d')
-    data = yf.download(symbol, start=start_date, end=end_date)
+def classification(symbol, start_date, end_date,downloaded_dict):
+    data_downloaded = pd.DataFrame(downloaded_dict[f'{symbol}'])
+    data = data_downloaded
     data['Pct'] = data['Close'].pct_change()
     data['Pct_Sign'] = np.where(data['Pct'] > 0, 1, 0)
 
@@ -284,10 +272,9 @@ def classification(symbol, start_date, end_date):
 
 
 
-def meanreversion(symbol, start_date, end_date, lookback_period=20, z_score_threshold=2):
-    start_date = datetime.strptime(start_date, '%Y-%m-%d')
-    end_date = datetime.strptime(end_date, '%Y-%m-%d')
-    data = yf.download(symbol, start=start_date, end=end_date)
+def meanreversion(symbol, start_date, end_date,downloaded_dict, lookback_period=20, z_score_threshold=2):
+    data_downloaded = pd.DataFrame(downloaded_dict[f'{symbol}'])
+    data = data_downloaded
     data['RollingMean'] = data['Close'].rolling(window=lookback_period).mean()
     data['RollingStd'] = data['Close'].rolling(window=lookback_period).std()
 
@@ -316,10 +303,9 @@ def meanreversion(symbol, start_date, end_date, lookback_period=20, z_score_thre
     return meanreversion
 
 
-def trend(symbol, start_date, end_date, short_window = 10, long_window = 50):
-    start_date = datetime.strptime(start_date, '%Y-%m-%d')
-    end_date = datetime.strptime(end_date, '%Y-%m-%d')
-    data = yf.download(symbol, start=start_date, end=end_date)
+def trend(symbol, start_date, end_date,downloaded_dict, short_window = 10, long_window = 50):
+    data_downloaded = pd.DataFrame(downloaded_dict[f'{symbol}'])
+    data = data_downloaded
     data['Short_MA'] = data['Close'].rolling(window=short_window).mean()
     data['Long_MA'] = data['Close'].rolling(window=long_window).mean()
 

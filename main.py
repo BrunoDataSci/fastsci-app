@@ -58,8 +58,9 @@ def drawdown():
     global start_date
     global end_date
     global drawdown
+    global downloaded_dict
     if symbol is not None:
-        drawdown = func.drawdown(symbol, start_date, end_date)
+        drawdown = func.drawdown(symbol, start_date, end_date,downloaded_dict)
         return render_template('drawdown_data.html',  drawdown=drawdown)
     else:
         return "Drawdown data is not available."
@@ -72,8 +73,9 @@ def drawdown_plot():
     global symbol
     global start_date
     global end_date
+    global downloaded_dict
     if symbol is not None:
-        drawdown_plot = func.drawdown_plot(symbol, start_date, end_date)
+        drawdown_plot = func.drawdown_plot(symbol, start_date, end_date,downloaded_dict)
         return render_template('drawdown_plot.html', drawdown_plot=drawdown_plot)
     else:
         return "Drawdown data is not available. Please calculate drawdown first."
@@ -85,8 +87,9 @@ def candlestick():
     global symbol
     global start_date
     global end_date
+    global downloaded_dict
     if symbol is not None:
-        candlestick_json, candlestick_table = func.candlestick_chart(symbol, start_date, end_date)
+        candlestick_json, candlestick_table = func.candlestick_chart(symbol, start_date, end_date,downloaded_dict)
         return render_template('candlestick_plot.html', candlestick_json=candlestick_json, candlestick_table=candlestick_table)
     else:
         return "No plot."
@@ -98,8 +101,9 @@ def lstm():
     global symbol
     global start_date
     global end_date
+    global downloaded_dict
     if symbol is not None:
-        lstm = func.lstm(symbol, start_date, end_date)
+        lstm = func.lstm(symbol, start_date, end_date,downloaded_dict)
         return render_template('lstm.html', lstm=lstm)
     else:
         return "No plot."
@@ -111,11 +115,12 @@ def crossover():
     global symbol
     global start_date
     global end_date
+    global downloaded_dict
     if request.method == 'GET':
         return render_template('crossover.html')
     elif request.method == 'POST':
         if symbol is not None:
-            crossover = func.crossover(symbol, start_date, end_date)
+            crossover = func.crossover(symbol, start_date, end_date,downloaded_dict)
             return render_template('crossover_result.html', crossover=crossover)
         else:
             return "Crossover data is not available. Please calculate crossover first."
@@ -126,11 +131,12 @@ def momentum():
     global symbol
     global start_date
     global end_date
+    global downloaded_dict
     if request.method == 'GET':
         return render_template('momentum.html')
     elif request.method == 'POST':
         if symbol is not None:
-            momentum = func.momentum(symbol, start_date, end_date)
+            momentum = func.momentum(symbol, start_date, end_date,downloaded_dict)
             return render_template('momentum_result.html', momentum=momentum)
         else:
             return "Momentum data is not available. Please calculate Momentum first."
@@ -141,8 +147,9 @@ def classification():
     global symbol
     global start_date
     global end_date
+    global downloaded_dict
     if symbol is not None:
-        classification = func.classification(symbol, start_date, end_date)
+        classification = func.classification(symbol, start_date, end_date,downloaded_dict)
         return render_template('logistic_regression.html', classification=classification)
     else:
         return "No sign."
@@ -154,8 +161,9 @@ def meanreversion():
     global symbol
     global start_date
     global end_date
+    global downloaded_dict
     if symbol is not None:
-        meanreversion = func.meanreversion(symbol, start_date, end_date)
+        meanreversion = func.meanreversion(symbol, start_date, end_date,downloaded_dict)
         return render_template('mean_reversion.html', meanreversion=meanreversion)
     else:
         return "Mean Reversion data is not available. Please calculate mean reversion first."
@@ -166,8 +174,9 @@ def trend():
     global symbol
     global start_date
     global end_date
+    global downloaded_dict
     if symbol is not None:
-        trend = func.trend(symbol, start_date, end_date)
+        trend = func.trend(symbol, start_date, end_date,downloaded_dict)
         return render_template('trend.html', trend=trend)
     else:
         return "trend data is not available. Please calculate trend first."
