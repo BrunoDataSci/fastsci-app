@@ -151,9 +151,12 @@ def meanreversion():
 
 @app.route('/trend', methods=['GET', 'POST'])
 def trend():
+    global symbol
+    global start_date
+    global end_date
     if symbol is not None:
         trend = func.trend(symbol, start_date, end_date)
-        return render_template('index.html', trend=trend)
+        return render_template('trend.html', trend=trend)
     else:
         return "trend data is not available. Please calculate trend first."
 

@@ -351,5 +351,5 @@ def trend(symbol, start_date, end_date, short_window = 10, long_window = 50):
     plt.savefig(buffer, format="png")
     plt.close()
     buffer.seek(0)
-    plot_trend = base64.b64encode(buffer.read()).decode("utf-8")
-    return plot_trend
+    trend = base64.b64encode(buffer.read()).decode("utf-8")
+    return trend
