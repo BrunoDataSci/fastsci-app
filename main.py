@@ -43,7 +43,9 @@ def main_page():
             return render_template('index.html')
 
     # For GET requests, when the form is not submitted
-    return render_template('index.html')
+    symbol = start_date = end_date = None
+    return render_template('index.html', symbol=symbol, start_date=start_date, end_date=end_date)
+
 
 
 @app.route('/describe', methods=['GET', 'POST'])
