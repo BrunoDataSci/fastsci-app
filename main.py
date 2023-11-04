@@ -10,7 +10,7 @@ image_base64 = None
 symbol = None
 start_date = None
 end_date = None
-
+downloaded = {}
 
 # Route for the main page (form input)
 @app.route('/', methods=['GET', 'POST'])
