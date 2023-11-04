@@ -183,9 +183,6 @@ def lstm(symbol, start_date, end_date):
     return lstm
 
 
-
-
-
 def crossover(symbol, start_date, end_date):
     start_date = datetime.strptime(start_date, '%Y-%m-%d')
     end_date = datetime.strptime(end_date, '%Y-%m-%d')
@@ -279,9 +276,9 @@ def classification(symbol, start_date, end_date):
     predicted_tomorrow_sign = model.predict(last_features.values.reshape(1, -1))
 
     if predicted_tomorrow_sign>0:
-        tomorrow_is = 'Positive';
+        tomorrow_is = 'Positive'
     else:
-        tomorrow_is = 'Negative';
+        tomorrow_is = 'Negative'
 
     classification = pd.DataFrame({'Prediction for Tomorrow': [tomorrow_is], 'Accuracy': [accuracy]})
 

@@ -10,7 +10,7 @@ image_base64 = None
 symbol = None
 start_date = None
 end_date = None
-downloaded = {}
+
 
 # Route for the main page (form input)
 @app.route('/', methods=['GET', 'POST'])
@@ -43,7 +43,6 @@ def describe():
     global symbol
     global start_date
     global end_date
-
     if symbol is not None:
         describe = func.describe(symbol, start_date, end_date)
         return render_template('describe.html', describe=describe)
