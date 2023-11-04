@@ -26,10 +26,8 @@ def download_data(symbol, start_date, end_date):
   return data_downloaded
 
 
-def describe(symbol, start_date, end_date):
-    start_date = datetime.strptime(start_date, '%Y-%m-%d')
-    end_date = datetime.strptime(end_date, '%Y-%m-%d')
-    data_downloaded = yf.download(symbol, start=start_date, end=end_date)
+def describe(symbol, start_date, end_date,downloaded_dict):
+    data_downloaded = pd.DataFrame(downloaded_dict[f'{symbol}'])
     db = data_downloaded[['Open','High','Low','Close','Adj Close','Volume']]
     describe = db.describe()
     return describe

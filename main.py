@@ -10,7 +10,7 @@ image_base64 = None
 symbol = None
 start_date = None
 end_date = None
-downloaded = {}
+downloaded_dict = {}
 
 # Route for the main page (form input)
 @app.route('/', methods=['GET', 'POST'])
@@ -26,9 +26,9 @@ def main_page():
         end_date = request.form['end_date']
 
         data_downloaded = func.download_data(symbol, start_date, end_date)
-        downloaded[symbol] = data_downloaded
+        downloaded_dict[symbol] = data_downloaded
 
-        if data_downloaded is not None:
+        if downloaded_dict is not None:
             return render_template('index.html', data_downloaded=data_downloaded)
         else:
             # Handle the case where data_downloaded is not available
@@ -43,8 +43,9 @@ def describe():
     global symbol
     global start_date
     global end_date
+    global downloaded_dict
     if symbol is not None:
-        describe = func.describe(symbol, start_date, end_date)
+        describe = func.describe(symbol, start_date, end_date,downloaded_dict)
         return render_template('describe.html', describe=describe)
     else:
         return "Describe data is not available."
