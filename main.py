@@ -67,7 +67,6 @@ def drawdown():
 
 
 
-# Route to display the drawdown plot
 @app.route('/drawdown_plot', methods=['GET', 'POST'])
 def drawdown_plot():
     global symbol
@@ -139,10 +138,13 @@ def classification():
 
 # Route to display the drawdown plot
 @app.route('/meanreversion', methods=['GET', 'POST'])
-def mean_reversion():
+def meanreversion():
+    global symbol
+    global start_date
+    global end_date
     if symbol is not None:
-        mean_reversion = func.mean_reversion(symbol, start_date, end_date)
-        return render_template('index.html', mean_reversion=mean_reversion)
+        meanreversion = func.meanreversion(symbol, start_date, end_date)
+        return render_template('mean_reversion.html', meanreversion=meanreversion)
     else:
         return "Mean Reversion data is not available. Please calculate mean reversion first."
 

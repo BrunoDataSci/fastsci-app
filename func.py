@@ -289,7 +289,7 @@ def classification(symbol, start_date, end_date):
 
 
 
-def mean_reversion(symbol, start_date, end_date, lookback_period=20, z_score_threshold=2):
+def meanreversion(symbol, start_date, end_date, lookback_period=20, z_score_threshold=2):
     start_date = datetime.strptime(start_date, '%Y-%m-%d')
     end_date = datetime.strptime(end_date, '%Y-%m-%d')
     data = yf.download(symbol, start=start_date, end=end_date)
@@ -317,8 +317,8 @@ def mean_reversion(symbol, start_date, end_date, lookback_period=20, z_score_thr
     plt.savefig(buffer, format="png")
     plt.close()
     buffer.seek(0)
-    plot_reversion = base64.b64encode(buffer.read()).decode("utf-8")
-    return plot_reversion
+    meanreversion = base64.b64encode(buffer.read()).decode("utf-8")
+    return meanreversion
 
 
 def trend(symbol, start_date, end_date, short_window = 10, long_window = 50):
