@@ -21,7 +21,6 @@ def main_page():
         global end_date
         global downloaded_dict
 
-
         symbol = request.form['symbol']
         start_date = request.form['start_date']
         end_date = request.form['end_date']
@@ -31,8 +30,11 @@ def main_page():
 
         if downloaded_dict is not None:
             return render_template('index.html', data_downloaded=data_downloaded)
+        elif:
+            data_downloaded = func.download_data(symbol, start_date, end_date)
+            downloaded_dict[symbol] = data_downloaded
+            return render_template('index.html', data_downloaded=data_downloaded)
         else:
-            # Handle the case where data_downloaded is not available
             return render_template('index.html')
 
     # For GET requests, when the form is not submitted
@@ -47,7 +49,12 @@ def describe():
     global start_date
     global end_date
     global downloaded_dict
-    if symbol is not None:
+    if downloaded_dict is not None:
+        describe = func.describe(symbol, start_date, end_date,downloaded_dict)
+        return render_template('describe.html', describe=describe)
+    elif:
+        data_downloaded = func.download_data(symbol, start_date, end_date)
+        downloaded_dict[symbol] = data_downloaded
         describe = func.describe(symbol, start_date, end_date,downloaded_dict)
         return render_template('describe.html', describe=describe)
     else:
@@ -62,7 +69,12 @@ def drawdown():
     global end_date
     global drawdown
     global downloaded_dict
-    if symbol is not None:
+    if downloaded_dict is not None:
+        drawdown = func.drawdown(symbol, start_date, end_date,downloaded_dict)
+        return render_template('drawdown_data.html',  drawdown=drawdown)
+    elif:
+        data_downloaded = func.download_data(symbol, start_date, end_date)
+        downloaded_dict[symbol] = data_downloaded
         drawdown = func.drawdown(symbol, start_date, end_date,downloaded_dict)
         return render_template('drawdown_data.html',  drawdown=drawdown)
     else:
@@ -77,7 +89,12 @@ def drawdown_plot():
     global start_date
     global end_date
     global downloaded_dict
-    if symbol is not None:
+    if downloaded_dict is not None:
+        drawdown_plot = func.drawdown_plot(symbol, start_date, end_date,downloaded_dict)
+        return render_template('drawdown_plot.html', drawdown_plot=drawdown_plot)
+    elif:
+        data_downloaded = func.download_data(symbol, start_date, end_date)
+        downloaded_dict[symbol] = data_downloaded
         drawdown_plot = func.drawdown_plot(symbol, start_date, end_date,downloaded_dict)
         return render_template('drawdown_plot.html', drawdown_plot=drawdown_plot)
     else:
@@ -91,7 +108,12 @@ def candlestick():
     global start_date
     global end_date
     global downloaded_dict
-    if symbol is not None:
+    if downloaded_dict is not None:
+        candlestick_json, candlestick_table = func.candlestick_chart(symbol, start_date, end_date,downloaded_dict)
+        return render_template('candlestick_plot.html', candlestick_json=candlestick_json, candlestick_table=candlestick_table)
+    elif:
+        data_downloaded = func.download_data(symbol, start_date, end_date)
+        downloaded_dict[symbol] = data_downloaded
         candlestick_json, candlestick_table = func.candlestick_chart(symbol, start_date, end_date,downloaded_dict)
         return render_template('candlestick_plot.html', candlestick_json=candlestick_json, candlestick_table=candlestick_table)
     else:
@@ -105,7 +127,12 @@ def lstm():
     global start_date
     global end_date
     global downloaded_dict
-    if symbol is not None:
+    if downloaded_dict is not None:
+        lstm = func.lstm(symbol, start_date, end_date,downloaded_dict)
+        return render_template('lstm.html', lstm=lstm)
+    elif:
+        data_downloaded = func.download_data(symbol, start_date, end_date)
+        downloaded_dict[symbol] = data_downloaded
         lstm = func.lstm(symbol, start_date, end_date,downloaded_dict)
         return render_template('lstm.html', lstm=lstm)
     else:
@@ -122,7 +149,12 @@ def crossover():
     if request.method == 'GET':
         return render_template('crossover.html')
     elif request.method == 'POST':
-        if symbol is not None:
+        if downloaded_dict is not None:
+            crossover = func.crossover(symbol, start_date, end_date,downloaded_dict)
+            return render_template('crossover_result.html', crossover=crossover)
+        elif:
+            data_downloaded = func.download_data(symbol, start_date, end_date)
+            downloaded_dict[symbol] = data_downloaded
             crossover = func.crossover(symbol, start_date, end_date,downloaded_dict)
             return render_template('crossover_result.html', crossover=crossover)
         else:
@@ -138,7 +170,12 @@ def momentum():
     if request.method == 'GET':
         return render_template('momentum.html')
     elif request.method == 'POST':
-        if symbol is not None:
+        if downloaded_dict is not None:
+            momentum = func.momentum(symbol, start_date, end_date,downloaded_dict)
+            return render_template('momentum_result.html', momentum=momentum)
+        elif:
+            data_downloaded = func.download_data(symbol, start_date, end_date)
+            downloaded_dict[symbol] = data_downloaded
             momentum = func.momentum(symbol, start_date, end_date,downloaded_dict)
             return render_template('momentum_result.html', momentum=momentum)
         else:
@@ -151,7 +188,12 @@ def classification():
     global start_date
     global end_date
     global downloaded_dict
-    if symbol is not None:
+    if downloaded_dict is not None:
+        classification = func.classification(symbol, start_date, end_date,downloaded_dict)
+        return render_template('logistic_regression.html', classification=classification)
+    elif:
+        data_downloaded = func.download_data(symbol, start_date, end_date)
+        downloaded_dict[symbol] = data_downloaded
         classification = func.classification(symbol, start_date, end_date,downloaded_dict)
         return render_template('logistic_regression.html', classification=classification)
     else:
@@ -165,7 +207,12 @@ def meanreversion():
     global start_date
     global end_date
     global downloaded_dict
-    if symbol is not None:
+    if downloaded_dict is not None:
+        meanreversion = func.meanreversion(symbol, start_date, end_date,downloaded_dict)
+        return render_template('mean_reversion.html', meanreversion=meanreversion)
+    elif:
+        data_downloaded = func.download_data(symbol, start_date, end_date)
+        downloaded_dict[symbol] = data_downloaded
         meanreversion = func.meanreversion(symbol, start_date, end_date,downloaded_dict)
         return render_template('mean_reversion.html', meanreversion=meanreversion)
     else:
@@ -178,7 +225,12 @@ def trend():
     global start_date
     global end_date
     global downloaded_dict
-    if symbol is not None:
+    if downloaded_dict is not None:
+        trend = func.trend(symbol, start_date, end_date,downloaded_dict)
+        return render_template('trend.html', trend=trend)
+    elif:
+        data_downloaded = func.download_data(symbol, start_date, end_date)
+        downloaded_dict[symbol] = data_downloaded
         trend = func.trend(symbol, start_date, end_date,downloaded_dict)
         return render_template('trend.html', trend=trend)
     else:
