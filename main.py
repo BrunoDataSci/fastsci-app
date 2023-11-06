@@ -90,12 +90,12 @@ def drawdown_plot():
     global end_date
     global downloaded_dict
     if downloaded_dict is not None:
-        drawdown_plot = func.drawdown_plot(symbol, start_date, end_date,downloaded_dict)
+        drawdown_plot = func.drawdown_plot(symbol, start_date, end_date, downloaded_dict)
         return render_template('drawdown_plot.html', drawdown_plot=drawdown_plot)
     elif downloaded_dict is None:
         data_downloaded = func.download_data(symbol, start_date, end_date)
         downloaded_dict[symbol] = data_downloaded
-        drawdown_plot = func.drawdown_plot(symbol, start_date, end_date,downloaded_dict)
+        drawdown_plot = func.drawdown_plot(symbol, start_date, end_date, downloaded_dict)
         return render_template('drawdown_plot.html', drawdown_plot=drawdown_plot)
     else:
         return "Drawdown data is not available. Please calculate drawdown first."
