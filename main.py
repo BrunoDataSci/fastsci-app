@@ -30,7 +30,7 @@ def main_page():
 
         if downloaded_dict is not None:
             return render_template('index.html', data_downloaded=data_downloaded)
-        elif:
+        elif downloaded_dict is None:
             data_downloaded = func.download_data(symbol, start_date, end_date)
             downloaded_dict[symbol] = data_downloaded
             return render_template('index.html', data_downloaded=data_downloaded)
@@ -52,7 +52,7 @@ def describe():
     if downloaded_dict is not None:
         describe = func.describe(symbol, start_date, end_date,downloaded_dict)
         return render_template('describe.html', describe=describe)
-    elif:
+    elif downloaded_dict is None:
         data_downloaded = func.download_data(symbol, start_date, end_date)
         downloaded_dict[symbol] = data_downloaded
         describe = func.describe(symbol, start_date, end_date,downloaded_dict)
@@ -72,7 +72,7 @@ def drawdown():
     if downloaded_dict is not None:
         drawdown = func.drawdown(symbol, start_date, end_date,downloaded_dict)
         return render_template('drawdown_data.html',  drawdown=drawdown)
-    elif:
+    elif downloaded_dict is None:
         data_downloaded = func.download_data(symbol, start_date, end_date)
         downloaded_dict[symbol] = data_downloaded
         drawdown = func.drawdown(symbol, start_date, end_date,downloaded_dict)
@@ -92,7 +92,7 @@ def drawdown_plot():
     if downloaded_dict is not None:
         drawdown_plot = func.drawdown_plot(symbol, start_date, end_date,downloaded_dict)
         return render_template('drawdown_plot.html', drawdown_plot=drawdown_plot)
-    elif:
+    elif downloaded_dict is None:
         data_downloaded = func.download_data(symbol, start_date, end_date)
         downloaded_dict[symbol] = data_downloaded
         drawdown_plot = func.drawdown_plot(symbol, start_date, end_date,downloaded_dict)
@@ -111,7 +111,7 @@ def candlestick():
     if downloaded_dict is not None:
         candlestick_json, candlestick_table = func.candlestick_chart(symbol, start_date, end_date,downloaded_dict)
         return render_template('candlestick_plot.html', candlestick_json=candlestick_json, candlestick_table=candlestick_table)
-    elif:
+    elif downloaded_dict is None:
         data_downloaded = func.download_data(symbol, start_date, end_date)
         downloaded_dict[symbol] = data_downloaded
         candlestick_json, candlestick_table = func.candlestick_chart(symbol, start_date, end_date,downloaded_dict)
@@ -130,7 +130,7 @@ def lstm():
     if downloaded_dict is not None:
         lstm = func.lstm(symbol, start_date, end_date,downloaded_dict)
         return render_template('lstm.html', lstm=lstm)
-    elif:
+    elif downloaded_dict is None:
         data_downloaded = func.download_data(symbol, start_date, end_date)
         downloaded_dict[symbol] = data_downloaded
         lstm = func.lstm(symbol, start_date, end_date,downloaded_dict)
@@ -152,7 +152,7 @@ def crossover():
         if downloaded_dict is not None:
             crossover = func.crossover(symbol, start_date, end_date,downloaded_dict)
             return render_template('crossover_result.html', crossover=crossover)
-        elif:
+        elif downloaded_dict is None:
             data_downloaded = func.download_data(symbol, start_date, end_date)
             downloaded_dict[symbol] = data_downloaded
             crossover = func.crossover(symbol, start_date, end_date,downloaded_dict)
@@ -173,7 +173,7 @@ def momentum():
         if downloaded_dict is not None:
             momentum = func.momentum(symbol, start_date, end_date,downloaded_dict)
             return render_template('momentum_result.html', momentum=momentum)
-        elif:
+        elif downloaded_dict is None:
             data_downloaded = func.download_data(symbol, start_date, end_date)
             downloaded_dict[symbol] = data_downloaded
             momentum = func.momentum(symbol, start_date, end_date,downloaded_dict)
@@ -191,7 +191,7 @@ def classification():
     if downloaded_dict is not None:
         classification = func.classification(symbol, start_date, end_date,downloaded_dict)
         return render_template('logistic_regression.html', classification=classification)
-    elif:
+    elif downloaded_dict is None:
         data_downloaded = func.download_data(symbol, start_date, end_date)
         downloaded_dict[symbol] = data_downloaded
         classification = func.classification(symbol, start_date, end_date,downloaded_dict)
@@ -210,7 +210,7 @@ def meanreversion():
     if downloaded_dict is not None:
         meanreversion = func.meanreversion(symbol, start_date, end_date,downloaded_dict)
         return render_template('mean_reversion.html', meanreversion=meanreversion)
-    elif:
+    elif downloaded_dict is None:
         data_downloaded = func.download_data(symbol, start_date, end_date)
         downloaded_dict[symbol] = data_downloaded
         meanreversion = func.meanreversion(symbol, start_date, end_date,downloaded_dict)
@@ -228,7 +228,7 @@ def trend():
     if downloaded_dict is not None:
         trend = func.trend(symbol, start_date, end_date,downloaded_dict)
         return render_template('trend.html', trend=trend)
-    elif:
+    elif downloaded_dict is None:
         data_downloaded = func.download_data(symbol, start_date, end_date)
         downloaded_dict[symbol] = data_downloaded
         trend = func.trend(symbol, start_date, end_date,downloaded_dict)
