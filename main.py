@@ -82,7 +82,7 @@ def drawdown():
 
 
 
-
+#drawdown_plot
 @app.route('/drawdown_plot', methods=['GET', 'POST'])
 def drawdown_plot():
     global symbol
